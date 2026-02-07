@@ -35,7 +35,7 @@ export class CategoryResolver {
     @Arg('id', () => String) id: string,
     @GqlUser() user: UserModel
   ): Promise<CategoryModel> {
-    return this.categoryService.findById(id, user.id);
+    return this.categoryService.getById(id, user.id);
   }
 
   @Mutation(() => CategoryModel)

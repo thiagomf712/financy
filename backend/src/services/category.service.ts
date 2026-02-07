@@ -27,7 +27,7 @@ export class CategoryService {
     });
   }
 
-  async findById(id: string, userId: string): Promise<CategoryModel> {
+  async getById(id: string, userId: string): Promise<CategoryModel> {
     const category = await prismaClient.category.findFirst({
       where: { id, userId },
     });
@@ -44,23 +44,33 @@ export class CategoryService {
     data: UpdateCategoryInput,
     userId: string
   ): Promise<CategoryModel> {
-    // Ensure ownership before updating
-    await this.findById(id, userId);
+    var category = await prismaClient.category.findFirst({
+      where: { id, userId },
+    });
+
+    if (!category) {
+      throw new Error('Categoria não encontrada');
+    }
 
     return prismaClient.category.update({
       where: { id: id },
       data: {
-        title: data.title ?? undefined,
-        description: data.description ?? undefined,
-        iconName: data.iconName ?? undefined,
-        colorHex: data.colorHex ?? undefined,
+        title: data.title ?? category.title,
+        description: data.description ?? category.description,
+        iconName: data.iconName ?? category.iconName,
+        colorHex: data.colorHex ?? category.colorHex,
       },
     });
   }
 
   async delete(id: string, userId: string): Promise<boolean> {
-    // Ensure ownership before deleting
-    await this.findById(id, userId);
+    var category = await prismaClient.category.findFirst({
+      where: { id, userId },
+    });
+
+    if (!category) {
+      throw new Error('Categoria não encontrada');
+    }
 
     await prismaClient.category.delete({
       where: { id },

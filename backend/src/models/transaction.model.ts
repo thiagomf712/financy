@@ -6,13 +6,9 @@ import {
   ObjectType,
   registerEnumType,
 } from 'type-graphql';
+import { TransactionType } from '../generated/prisma/enums';
 import { CategoryModel } from './category.model';
 import { UserModel } from './user.model';
-
-enum TransactionType {
-  INCOME = 'INCOME',
-  EXPENSE = 'EXPENSE',
-}
 
 registerEnumType(TransactionType, {
   name: 'TransactionType',
