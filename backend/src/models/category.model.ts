@@ -11,7 +11,7 @@ export class CategoryModel {
   title!: string;
 
   @Field(() => String, { nullable: true })
-  description?: string;
+  description?: string | null;
 
   @Field(() => String)
   iconName!: string;
@@ -28,8 +28,8 @@ export class CategoryModel {
   @Field(() => GraphQLISODateTime)
   updatedAt!: Date;
 
-  @Field(() => UserModel)
-  user!: UserModel;
+  @Field(() => UserModel, { nullable: true })
+  user?: UserModel;
 
   @Field(() => [TransactionModel], { nullable: true })
   transactions?: TransactionModel[];

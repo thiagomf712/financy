@@ -24,7 +24,7 @@ export class TransactionModel {
   @Field(() => ID)
   id!: string;
 
-  @Field()
+  @Field(() => String)
   description!: string;
 
   @Field(() => Float)
@@ -49,9 +49,9 @@ export class TransactionModel {
   updatedAt!: Date;
 
   // Relations
-  @Field(() => CategoryModel)
-  category!: CategoryModel;
+  @Field(() => CategoryModel, { nullable: true })
+  category?: CategoryModel;
 
-  @Field(() => UserModel)
-  user!: UserModel;
+  @Field(() => UserModel, { nullable: true })
+  user?: UserModel;
 }

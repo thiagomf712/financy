@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+import { Arg, Mutation, Resolver } from 'type-graphql';
 import { LoginInput, RegisterInput } from '../dtos/inputs/auth.input';
 import { LoginOutput, RegisterOutput } from '../dtos/outputs/auth.output';
 import { AuthService } from '../services/auth.service';
@@ -6,11 +6,6 @@ import { AuthService } from '../services/auth.service';
 @Resolver()
 export class AuthResolver {
   private authService = new AuthService();
-
-  @Query(() => String)
-  async hello() {
-    return 'Hello, world!';
-  }
 
   @Mutation(() => LoginOutput)
   async login(
