@@ -1,0 +1,28 @@
+import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+import { LoginInput, RegisterInput } from '../dtos/inputs/auth.input';
+import { LoginOutput, RegisterOutput } from '../dtos/outputs/auth.output';
+import { AuthService } from '../services/auth.service';
+
+@Resolver()
+export class AuthResolver {
+  private authService = new AuthService();
+
+  @Query(() => String)
+  async hello() {
+    return 'Hello, world!';
+  }
+
+  @Mutation(() => LoginOutput)
+  async login(
+    @Arg('data', () => LoginInput) data: LoginInput
+  ): Promise<LoginOutput> {
+    return this.authService.login(data);
+  }
+
+  @Mutation(() => RegisterOutput)
+  async register(
+    @Arg('data', () => RegisterInput) data: RegisterInput
+  ): Promise<RegisterOutput> {
+    return this.authService.register(data);
+  }
+}
