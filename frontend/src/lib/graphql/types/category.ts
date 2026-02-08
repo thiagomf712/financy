@@ -1,3 +1,5 @@
+import type { TransactionType } from './transaction'
+
 export type CategoryData = {
   id: string
   title: string
@@ -12,6 +14,7 @@ export type CategoryDataWithTransactions = CategoryData & {
   transactions: Array<{
     id: string
     amount: number
+    type: TransactionType
   }>
 }
 

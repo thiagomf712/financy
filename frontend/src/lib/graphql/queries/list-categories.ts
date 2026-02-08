@@ -18,7 +18,8 @@ export const LIST_CATEGORIES_QUERY = gql`
       title
       transactions {
         id,
-        amount
+        amount,
+        type
       }
     }
   }

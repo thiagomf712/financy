@@ -90,38 +90,40 @@ export function TransactionsTable({
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={5} align="left">
+          <TableCell colSpan={3} align="left">
             {paginationText}
           </TableCell>
-          <TableCell colSpan={1}>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    onClick={() => onPageChange(page - 1)}
-                    disabled={page === 0}
-                  />
-                </PaginationItem>
-                {Array.from({ length: Math.ceil(total / 10) }).map(
-                  (_, index) => (
-                    <PaginationItem key={index}>
-                      <PaginationLink
-                        onClick={() => onPageChange(index)}
-                        isActive={index === page}
-                      >
-                        {index + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  )
-                )}
-                <PaginationItem>
-                  <PaginationNext
-                    onClick={() => onPageChange(page + 1)}
-                    disabled={(page + 1) * 10 >= total}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+          <TableCell colSpan={3} align="right">
+            <div className="flex items-center">
+              <Pagination className="justify-end">
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => onPageChange(page - 1)}
+                      disabled={page === 0}
+                    />
+                  </PaginationItem>
+                  {Array.from({ length: Math.ceil(total / 10) }).map(
+                    (_, index) => (
+                      <PaginationItem key={index}>
+                        <PaginationLink
+                          onClick={() => onPageChange(index)}
+                          isActive={index === page}
+                        >
+                          {index + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    )
+                  )}
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() => onPageChange(page + 1)}
+                      disabled={(page + 1) * 10 >= total}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            </div>
           </TableCell>
         </TableRow>
       </TableFooter>

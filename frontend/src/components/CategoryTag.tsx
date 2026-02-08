@@ -13,7 +13,9 @@ export function CategoryTag({ title, color }: CategoryTagProps) {
   }
 
   return (
-    <div className={cn('px-3 py-1 rounded-full', classesColors.background)}>
+    <div
+      className={cn('px-3 py-1 rounded-full w-fit', classesColors.background)}
+    >
       <span className={cn('font-medium text-sm', classesColors.text)}>
         {title}
       </span>

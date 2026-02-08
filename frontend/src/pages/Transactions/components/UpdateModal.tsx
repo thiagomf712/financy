@@ -21,6 +21,8 @@ import {
   type GetTransactionData,
   type GetTransactionInput,
 } from '@/lib/graphql/queries/get-transaction'
+import { LIST_CATEGORIES_QUERY } from '@/lib/graphql/queries/list-categories'
+import { GET_TRANSACTIONS_SUMMARY_QUERY } from '@/lib/graphql/queries/list-transactions'
 import { formatMoneyInput } from '@/utils/formatMoney'
 import { FormTransaction, type TransactionFormData } from './FormTransaction'
 
@@ -46,6 +48,10 @@ export function UpdateTransactionModal({
     UpdateTransactionData,
     UpdateTransactionInput
   >(UPDATE_TRANSACTION_MUTATION, {
+    refetchQueries: [
+      { query: LIST_CATEGORIES_QUERY },
+      { query: GET_TRANSACTIONS_SUMMARY_QUERY },
+    ],
     onCompleted() {
       toast.success('Transação atualizada com sucesso!')
       setOpen(false)

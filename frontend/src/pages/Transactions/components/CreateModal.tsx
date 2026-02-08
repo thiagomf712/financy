@@ -16,14 +16,18 @@ import {
   type CreateTransactionData,
   type CreateTransactionInput,
 } from '@/lib/graphql/mutations/create-transaction'
+import { LIST_CATEGORIES_QUERY } from '@/lib/graphql/queries/list-categories'
+import { GET_TRANSACTIONS_SUMMARY_QUERY } from '@/lib/graphql/queries/list-transactions'
 import { FormTransaction, type TransactionFormData } from './FormTransaction'
 
 type CreateTransactionFormProps = {
   onCreate(): void
+  triggerProps?: React.ComponentProps<typeof Button>
 }
 
 export function CreateTransactionModal({
   onCreate,
+  triggerProps,
 }: CreateTransactionFormProps) {
   const [open, setOpen] = useState(false)
 
@@ -31,6 +35,10 @@ export function CreateTransactionModal({
     CreateTransactionData,
     CreateTransactionInput
   >(CREATE_TRANSACTION_MUTATION, {
+    refetchQueries: [
+      { query: LIST_CATEGORIES_QUERY },
+      { query: GET_TRANSACTIONS_SUMMARY_QUERY },
+    ],
     onCompleted() {
       toast.success('Transação criada com sucesso!')
       setOpen(false)
@@ -58,7 +66,7 @@ export function CreateTransactionModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm">
+        <Button size="sm" {...triggerProps}>
           <PlusIcon /> Nova transação
         </Button>
       </DialogTrigger>
