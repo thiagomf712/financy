@@ -6,6 +6,8 @@ export type CategoryData = {
   iconName: string
 }
 
+export type CategoryNameData = Pick<CategoryData, 'id' | 'title'>
+
 export type CategoryDataWithTransactions = CategoryData & {
   transactions: Array<{
     id: string

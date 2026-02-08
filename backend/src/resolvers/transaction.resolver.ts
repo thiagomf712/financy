@@ -13,7 +13,10 @@ import {
   CreateTransactionInput,
   UpdateTransactionInput,
 } from '../dtos/inputs/transaction.input';
-import { PaginatedTransactions } from '../dtos/outputs/transaction.output';
+import {
+  PaginatedTransactions,
+  SummaryTransactions,
+} from '../dtos/outputs/transaction.output';
 import { GqlUser } from '../graphql/decorators/user.decorator';
 import { IsAuth } from '../middlewares/auth.middleware';
 import { CategoryModel } from '../models/category.model';
@@ -42,6 +45,11 @@ export class TransactionResolver {
     @GqlUser() user: UserModel
   ): Promise<TransactionModel> {
     return this.transactionService.getById(id, user.id);
+  }
+
+  @Query(() => SummaryTransactions)
+  async getSummary(@GqlUser() user: UserModel): Promise<SummaryTransactions> {
+    return this.transactionService.getSummary(user.id);
   }
 
   @Mutation(() => TransactionModel)

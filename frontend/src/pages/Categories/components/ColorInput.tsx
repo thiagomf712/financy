@@ -57,18 +57,18 @@ function ColorInputItem({
   const bgColorClass = bgColorsMap[colorName]
 
   return (
-    <FieldLabel htmlFor={`icon-input-${colorName}`}>
+    <FieldLabel htmlFor={`color-input-${colorName}`}>
       <Field
         data-invalid={isInvalid}
         className={cn(
-          'w-12.5 h-7.5 p-1 border border-gray-300 rounded-lg',
+          'w-12.5 h-7.5 p-1 border border-gray-300 rounded-lg cursor-pointer',
           selected && 'border-brand-base'
         )}
       >
         <div className={cn('w-10 h-5 rounded-md', bgColorClass)} />
 
         <RadioGroupItem
-          id={`icon-input-${colorName}`}
+          id={`color-input-${colorName}`}
           value={colorName}
           className="sr-only"
           aria-invalid={isInvalid}

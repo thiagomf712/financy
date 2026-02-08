@@ -22,7 +22,7 @@ export function CategoryCard({
   const iconName = category.iconName as CategoryIconName
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-5">
+    <div className="bg-white rounded-lg border border-gray-200 p-6 flex flex-col gap-5">
       <div className="flex items-center justify-between">
         <CategoryIcon color={colorName} iconName={iconName} />
 
@@ -38,7 +38,7 @@ export function CategoryCard({
         <p className="text-sm text-gray-600">{category.description}</p>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-auto">
         <CategoryTag color={colorName} title={category.title} />
 
         <span className="text-sm text-gray-600">

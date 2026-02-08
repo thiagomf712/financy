@@ -61,7 +61,7 @@ function IconInputItem({ iconName, selected, isInvalid }: IconInputItemProps) {
       <Field
         data-invalid={isInvalid}
         className={cn(
-          'size-10.5 p-2.5 border border-gray-300 rounded-lg',
+          'size-10.5 p-2.5 border border-gray-300 rounded-lg cursor-pointer',
           selected && 'border-brand-base'
         )}
       >

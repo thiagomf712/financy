@@ -12,13 +12,42 @@ export type PaginatedTransactions = {
   total: number;
 };
 
+export type SummarizedTransactions = {
+  totalIncome: number;
+  totalExpense: number;
+};
+
 export class TransactionService {
+  async getSummary(userId: string): Promise<SummarizedTransactions> {
+    const result = await prismaClient.transaction.groupBy({
+      by: ['type'],
+      where: { userId },
+      _sum: { amount: true },
+    });
+
+    const summary: SummarizedTransactions = {
+      totalIncome: 0,
+      totalExpense: 0,
+    };
+
+    result.forEach(group => {
+      if (group.type === 'INCOME') {
+        summary.totalIncome = group._sum.amount ?? 0;
+      } else if (group.type === 'EXPENSE') {
+        summary.totalExpense = group._sum.amount ?? 0;
+      }
+    });
+
+    return summary;
+  }
+
   async findManyPaginated(
     query: GetTransactionsArgs,
     userId: string
   ): Promise<PaginatedTransactions> {
     const where: Prisma.TransactionWhereInput = {
       userId,
+      ...(query.search ? { description: { contains: query.search } } : {}),
       ...(query.categoryId && { categoryId: query.categoryId }),
       ...(query.type && { type: query.type }),
       ...(query.startDate || query.endDate

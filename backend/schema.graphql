@@ -65,9 +65,10 @@ type PaginatedTransactions {
 
 type Query {
   getCategory(id: String!): CategoryModel!
+  getSummary: SummaryTransactions!
   getTransaction(id: String!): TransactionModel!
   listCategories: [CategoryModel!]!
-  listTransactions(categoryId: String, endDate: DateTimeISO, limit: Int! = 10, pageNumber: Int! = 1, startDate: DateTimeISO, type: TransactionType): PaginatedTransactions!
+  listTransactions(categoryId: String, endDate: DateTimeISO, limit: Int! = 10, pageNumber: Int! = 1, search: String, startDate: DateTimeISO, type: TransactionType): PaginatedTransactions!
 }
 
 input RegisterInput {
@@ -79,6 +80,11 @@ input RegisterInput {
 type RegisterOutput {
   token: String!
   user: UserModel!
+}
+
+type SummaryTransactions {
+  totalExpense: Float!
+  totalIncome: Float!
 }
 
 type TransactionModel {

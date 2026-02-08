@@ -9,6 +9,9 @@ export class GetTransactionsArgs {
   @Field(() => Int, { defaultValue: 10 })
   limit: number = 10;
 
+  @Field(() => String, { nullable: true })
+  search?: string;
+
   @Field(() => GraphQLISODateTime, { nullable: true })
   startDate?: Date;
 

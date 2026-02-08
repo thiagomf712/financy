@@ -15,11 +15,14 @@ const buttonVariants = cva(
         ghost:
           'hover:bg-gray-200 text-gray-700 border border-gray-300 shadow-xs',
         link: 'font-medium text-brand-base underline-offset-4 hover:underline',
+        input:
+          'font-medium border bg-white hover:bg-gray-200 text-gray-500 border-gray-300 justify-start',
       },
       size: {
         default: 'h-12 px-4 py-3',
         sm: 'h-9 px-3 py-2 text-sm',
         icon: 'size-8 p-2',
+        input: 'px-3 py-3.5',
       },
     },
     defaultVariants: {
